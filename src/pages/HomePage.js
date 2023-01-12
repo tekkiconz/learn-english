@@ -2,20 +2,8 @@ import { Helmet } from 'react-helmet-async';
 import { m, useScroll, useSpring } from 'framer-motion';
 // @mui
 import { useTheme } from '@mui/material/styles';
-import { Box } from '@mui/material';
 // sections
-import {
-  HomeHero,
-  HomeMinimal,
-  HomeDarkMode,
-  HomeLookingFor,
-  HomeForDesigner,
-  HomeColorPresets,
-  HomePricingPlans,
-  HomeAdvertisement,
-  HomeCleanInterfaces,
-  HomeHugePackElements,
-} from '../sections/home';
+import { HomeHero } from '../sections/home';
 
 // ----------------------------------------------------------------------
 
@@ -52,35 +40,7 @@ export default function HomePage() {
         <title> The starting point for your next project | Minimal UI</title>
       </Helmet>
 
-      {progress}
-
       <HomeHero />
-
-      <Box
-        sx={{
-          overflow: 'hidden',
-          position: 'relative',
-          bgcolor: 'background.default',
-        }}
-      >
-        <HomeMinimal />
-
-        <HomeHugePackElements />
-
-        <HomeForDesigner />
-
-        <HomeDarkMode />
-
-        <HomeColorPresets />
-
-        <HomeCleanInterfaces />
-
-        <HomePricingPlans />
-
-        <HomeLookingFor />
-
-        <HomeAdvertisement />
-      </Box>
     </>
   );
 }

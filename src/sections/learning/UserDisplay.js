@@ -21,14 +21,9 @@ const StyledOverlay = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-UserCard.propTypes = {
-  user: PropTypes.object,
-};
-
-export default function UserCard({ user }) {
-  const { name, cover, avatarUrl, email } = user;
-  const { isInitialized, isAuthenticated } = useAuthContext();
-
+export default function UserCard() {
+  const { isInitialized, isAuthenticated, user } = useAuthContext();
+  const { displayName: name, cover, photoURL: avatarUrl, email } = user || {};
   if (!isInitialized || !isAuthenticated) {
     return (
       <Card sx={{ textAlign: 'center' }}>

@@ -1,11 +1,10 @@
-import { m, useScroll } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { m } from 'framer-motion';
 import { Link as RouterLink } from 'react-router-dom';
 // @mui
 import { styled, alpha, useTheme } from '@mui/material/styles';
-import { Button, Box, Link, Container, Typography, Stack, Grid } from '@mui/material';
+import { Button, Box, Container, Typography, Stack, Grid } from '@mui/material';
 // routes
-import { PATH_FIGMA_PREVIEW, PATH_FREE_VERSION, PATH_PAGE } from '../../routes/paths';
+import { PATH_PAGE } from '../../routes/paths';
 // hooks
 import useResponsive from '../../hooks/useResponsive';
 // utils
@@ -13,7 +12,6 @@ import { textGradient, bgGradient } from '../../utils/cssStyles';
 // config
 import { HEADER } from '../../config-global';
 // components
-import SvgColor from '../../components/svg-color';
 import Iconify from '../../components/iconify';
 import { MotionContainer, varFade } from '../../components/animate';
 
@@ -92,26 +90,6 @@ const StyledEllipseBottom = styled('div')(({ theme }) => ({
 export default function HomeHero() {
   const isDesktop = useResponsive('up', 'md');
 
-  const { scrollYProgress } = useScroll();
-
-  const [hide, setHide] = useState(false);
-
-  useEffect(
-    () =>
-      scrollYProgress.onChange((scrollHeight) => {
-        if (scrollHeight > 0.8) {
-          setHide(true);
-        } else {
-          setHide(false);
-        }
-      }),
-    [scrollYProgress]
-  );
-
-  if (hide) {
-    return null;
-  }
-
   return (
     <>
       <StyledRoot>
@@ -146,8 +124,7 @@ function Description() {
     <StyledDescription>
       <m.div variants={varFade().in}>
         <Typography variant="h2" sx={{ textAlign: 'center' }}>
-          Start a <br />
-          new project with
+          Improve your
         </Typography>
       </m.div>
 
@@ -161,79 +138,31 @@ function Description() {
             repeat: Infinity,
           }}
         >
-          Minimal
+          English speaking skill
         </StyledGradientText>
       </m.div>
 
       <m.div variants={varFade().in}>
-        <Typography variant="body2" sx={{ textAlign: 'center' }}>
-          The starting point for your next project is based on MUI.Easy customization Helps you
-          build apps faster and better.
-        </Typography>
-      </m.div>
-
-      <m.div variants={varFade().in}>
         <Stack spacing={1.5} direction={{ xs: 'column-reverse', sm: 'row' }} sx={{ my: 5 }}>
-          <Stack alignItems="center" spacing={2}>
-            <Button
-              component={RouterLink}
-              to={PATH_PAGE.learn}
-              color="inherit"
-              size="large"
-              variant="contained"
-              startIcon={<Iconify icon="eva:flash-fill" width={24} />}
-              sx={{
-                bgcolor: 'text.primary',
-                color: (theme) => (theme.palette.mode === 'light' ? 'common.white' : 'grey.800'),
-                '&:hover': {
-                  bgcolor: 'text.primary',
-                },
-              }}
-            >
-              Live Preview
-            </Button>
-
-            <Link
-              color="inherit"
-              variant="caption"
-              target="_blank"
-              rel="noopener"
-              href={PATH_FREE_VERSION}
-              sx={{ textDecoration: 'underline', display: 'inline-flex', alignItems: 'center' }}
-            >
-              <Iconify icon="eva:external-link-fill" width={16} sx={{ mr: 0.5 }} />
-              Get Free Version
-            </Link>
-          </Stack>
-
           <Button
+            component={RouterLink}
+            to={PATH_PAGE.learn}
             color="inherit"
             size="large"
-            variant="outlined"
-            startIcon={<Iconify icon="eva:external-link-fill" width={24} />}
-            target="_blank"
-            rel="noopener"
-            href={PATH_FIGMA_PREVIEW}
-            sx={{ borderColor: 'text.primary' }}
+            variant="contained"
+            startIcon={<Iconify icon="eva:flash-fill" width={24} />}
+            sx={{
+              bgcolor: 'text.primary',
+              color: (theme) => (theme.palette.mode === 'light' ? 'common.white' : 'grey.800'),
+              '&:hover': {
+                bgcolor: 'text.primary',
+              },
+            }}
           >
-            Design Preview
+            Start learning
           </Button>
         </Stack>
       </m.div>
-
-      <Stack spacing={3} sx={{ textAlign: 'center', opacity: 0.4 }}>
-        <m.div variants={varFade().in}>
-          <Typography variant="overline">Available For</Typography>
-        </m.div>
-
-        <Stack spacing={2} direction="row" justifyContent="center">
-          {['sketch', 'figma', 'js', 'ts', 'nextjs'].map((platform) => (
-            <m.div key={platform} variants={varFade().in}>
-              <SvgColor src={`/assets/icons/platforms/ic_${platform}.svg`} />
-            </m.div>
-          ))}
-        </Stack>
-      </Stack>
     </StyledDescription>
   );
 }

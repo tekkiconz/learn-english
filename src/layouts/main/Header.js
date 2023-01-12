@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 // @mui
 import { useTheme } from '@mui/material/styles';
-import { Box, Button, AppBar, Toolbar, Container } from '@mui/material';
+import { Box, Button, AppBar, Toolbar, Container, Avatar } from '@mui/material';
 // hooks
 import useOffSetTop from '../../hooks/useOffSetTop';
 import useResponsive from '../../hooks/useResponsive';
@@ -11,18 +12,21 @@ import { bgBlur } from '../../utils/cssStyles';
 // config
 import { HEADER } from '../../config-global';
 // routes
-import { PATH_MINIMAL_ON_STORE } from '../../routes/paths';
+import { PATH_AUTH, PATH_PAGE } from '../../routes/paths';
 // components
 import Logo from '../../components/logo';
 //
 import navConfig from './nav/config-navigation';
 import NavMobile from './nav/mobile';
 import NavDesktop from './nav/desktop';
+import { useAuthContext } from '../../auth/useAuthContext';
 
 // ----------------------------------------------------------------------
 
 export default function Header() {
   const carouselRef = useRef(null);
+
+  const { isAuthenticated, user } = useAuthContext();
 
   const theme = useTheme();
 
@@ -58,9 +62,31 @@ export default function Header() {
 
           {isDesktop && <NavDesktop isOffset={isOffset} data={navConfig} />}
 
-          <Button variant="contained" target="_blank" rel="noopener" href={PATH_MINIMAL_ON_STORE}>
-            Purchase Now
-          </Button>
+          {isAuthenticated ? (
+            <Link to={PATH_PAGE.account}>
+              <Avatar
+                alt={user.displayName}
+                src={user.photoURL}
+                sx={{
+                  '&:hover': {
+                    cursor: 'pointer',
+                  },
+                }}
+              />
+            </Link>
+          ) : (
+            <>
+              <Link to={PATH_AUTH.register}>
+                <Button variant="contained">Sign up</Button>
+              </Link>
+
+              <Link to={PATH_AUTH.login}>
+                <Button variant="outlined" sx={{ marginLeft: 2 }}>
+                  Log in
+                </Button>
+              </Link>
+            </>
+          )}
 
           {!isDesktop && <NavMobile isOffset={isOffset} data={navConfig} />}
         </Container>

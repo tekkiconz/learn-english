@@ -7,14 +7,12 @@ import { useAuthContext } from '../../auth/useAuthContext';
 const SectionList = () => {
   const { isInitialized, isAuthenticated } = useAuthContext();
 
-  useEffect(() => {
-    if (!isInitialized || !isAuthenticated) {
-      return;
-    }
-    // TODO: Call api to get progress (if needed)
-    // eslint-disable-next-line consistent-return
-    return '';
-  }, [isInitialized, isAuthenticated]);
+  // useEffect(() => {
+  //   if (!isInitialized || !isAuthenticated) {
+  //   }
+  //   // TODO: Call api to get progress (if needed)
+  //   // eslint-disable-next-line consistent-return
+  // }, [isInitialized, isAuthenticated]);
 
   return (
     <Box
@@ -28,7 +26,14 @@ const SectionList = () => {
       }}
     >
       {configSectionList.map((section) => (
-        <Card key={section.id}>
+        <Card
+          key={section.id}
+          sx={(theme) => ({
+            '&:hover': {
+              boxShadow: theme.shadows[5],
+            },
+          })}
+        >
           <Box padding={3} display="flex" justifyContent="center" alignItems="center" height={200}>
             {section.icon}
           </Box>

@@ -18,11 +18,13 @@ export const PATH_AUTH = {
 };
 
 export const PATH_PAGE = {
+  home: '/',
   page404: '/404',
   components: '/components',
   learn: '/learn',
   account: '/account',
   translation: '/translation',
+  translationSearch: (item) => `/translation/${item}`,
 };
 
 export const PATH_ZONE_ON_STORE = 'https://mui.com/store/items/zone-landing-page/';

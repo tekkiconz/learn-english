@@ -17,12 +17,6 @@ const navConfig = [
     icon: <Iconify icon="ant-design:translation-outlined" />,
     path: PATH_PAGE.translation,
   },
-  { title: 'Account', icon: <Iconify icon="ic:outline-account-circle" />, path: PATH_PAGE.account },
-  {
-    title: 'Components',
-    icon: <Iconify icon="ic:round-grain" />,
-    path: PATH_PAGE.components,
-  },
 ];
 
 export default navConfig;
